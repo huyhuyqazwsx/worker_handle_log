@@ -7,7 +7,7 @@ METRICS = {"temp", "hum_air", "hum_soil", "light"}
 
 def flush_to_firestore():
     now = datetime.utcnow()
-    expired_at = now + timedelta(minutes=10)
+    expired_at = now + timedelta(days=1)
 
     for device_id, metrics in acc.items():
         doc = {}

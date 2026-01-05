@@ -21,7 +21,7 @@ def main():
         id="flush_job"
     )
 
-    # Cleanup mỗi 1 ngày
+    # Cleanup mỗi n ngày
     scheduler.add_job(
         cleanup_expired_logs,
         "interval",
@@ -33,7 +33,7 @@ def main():
 
     print("Collector running")
     print("Flush every 10 seconds")
-    print("Cleanup every 1 minute")
+    print("Cleanup every 5 minute")
 
     while True:
         time.sleep(60)
