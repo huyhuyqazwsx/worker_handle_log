@@ -1,0 +1,4 @@
+# Secrets
+serviceAccount.json
+*.json
+.env
