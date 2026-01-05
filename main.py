@@ -25,7 +25,7 @@ def main():
     scheduler.add_job(
         cleanup_expired_logs,
         "interval",
-        minutes=1,
+        minutes=5,
         id="cleanup_job"
     )
 

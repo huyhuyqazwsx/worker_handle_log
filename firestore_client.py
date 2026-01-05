@@ -1,20 +1,25 @@
 import os
+import json
 import firebase_admin
 from firebase_admin import credentials, firestore, db
 
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-SERVICE_ACCOUNT_PATH = os.path.join(BASE_DIR, "serviceAccount.json")
+# Lấy JSON từ environment variable
+service_account_json = os.environ.get("GOOGLE_SERVICE_ACCOUNT_JSON")
 
-print("Service account path:", SERVICE_ACCOUNT_PATH)
+if not service_account_json:
+    raise RuntimeError("Missing GOOGLE_SERVICE_ACCOUNT_JSON env var")
 
-cred = credentials.Certificate(SERVICE_ACCOUNT_PATH)
+cred_dict = json.loads(service_account_json)
 
-firebase_admin.initialize_app(
-    cred,
-    {
-        "databaseURL": "https://tree-watcher-4bddd-default-rtdb.asia-southeast1.firebasedatabase.app"
-    }
-)
+# Init Firebase
+if not firebase_admin._apps:
+    firebase_admin.initialize_app(
+        credentials.Certificate(cred_dict),
+        {
+            "databaseURL": "https://tree-watcher-4bddd-default-rtdb.asia-southeast1.firebasedatabase.app"
+        }
+    )
 
 firestore_db = firestore.client()
 rtdb = db.reference()
+
