@@ -22,12 +22,13 @@ def rtdb_listener(event):
     if event.path == "/":
         print("Skip (root snapshot)")
         return
+    print(event.path)
 
     path = event.path.strip("/")
     parts = path.split("/")
 
-    # path dạng: device_001/view/hum_air
-    if len(parts) == 3 and parts[1] == "view":
+    # path dạng: device_001/view/
+    if len(parts) == 2 and parts[1] == "view":
         device_id = parts[0]
 
         # Lay toan bo snapshot
