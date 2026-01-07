@@ -22,6 +22,6 @@ def cleanup_expired_logs():
         for doc in expired_docs:
             doc.reference.delete()
             deleted += 1
-            print(f"🗑 Deleted: {device_id}/view/{doc.id}")
+            print(f"Deleted: {device_id}/view/{doc.id}")
 
     print(f"[CLEANUP] Done. Deleted {deleted} docs")
